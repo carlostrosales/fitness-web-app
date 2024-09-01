@@ -10,6 +10,11 @@ const Login = () => {
         <label name="password"> 
             Password <input></input>
         </label>
+        <button>Login</button>
+        <p>Forgot password?</p>
+        <p>Don't have an account? Create new</p>
+        <p>or login with</p>
+        <button>Sign in with Google</button>
         </div>
     )
 }
