@@ -1,8 +1,10 @@
 import React from 'react';
 
+import styles from './Login.module.css';
+
 const Login = () => {
     return (
-        <div>
+        <div className={styles.flex}>
         <h1>Login</h1>
         <label name="email">
             Email ID <input></input>
