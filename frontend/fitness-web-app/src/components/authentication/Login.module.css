@@ -1,5 +1,118 @@
 .flex {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.forms {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+    color: #c5c5c5;
+    font-size: 18px;
+}
+
+.input {
+    margin-top: 0.5rem;
+    width: 24rem;
+    height: 2.2rem;
+    border: 2px solid rgba(197, 197, 197, 0.4);
+    border-radius: 6px;
+}
+
+.loginBtn {
+    margin-top: 2rem;
+    margin-right: 160px;
+    font-weight: 600;
+    border-radius: 15px;
+    width: 8rem;
+    height: 2.5rem;
+    color: white;
+    background-color: #027CE6;
+    border: 2px solid rgba(197, 197, 197, 0.4);
+    font-size: 15px;
+}
+
+.divRow {
+    display: flex;
+}
+
+.title {
+    margin-top: 3rem;
+}
+
+.password {
+    margin-top: 2.7rem;
+    color: #66B5FF;
+    font-size: 14px;
+}
+
+.account {
+    margin-right: 190px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.createNew {
+    text-decoration: none;
+    color: #66B5FF;
+}
+
+.googleBtn {
+    margin-top: 2rem;
+    margin-right: 5px;
+    padding-left: 2rem;
+    font-weight: 600;
+    border-radius: 15px;
+    width: 11rem;
+    height: 2.5rem;
+    color: #027CE6;
+    background-color: white;
+    border: 2px solid rgba(197, 197, 197, 0.4);
+    font-size: 12px;
+    background-image: url(./google.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: .25rem;
+}
+
+.loginWithContainer {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    margin-top: 1rem;
+}
+
+.loginWithContainer::before,
+.loginWithContainer::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: #ccc; 
+    margin: 0 10px; 
+}
+
+.loginWith {
+    white-space: nowrap;
+    color: black; 
+    font-size: 12px;
+}
+
+.cornerImage {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 150px; /* Adjust the width to fit your design */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+.cornerImage {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 150px; /* Adjust the width to fit your design */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow */
 }
