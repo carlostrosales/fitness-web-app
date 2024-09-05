@@ -17,9 +17,9 @@ const Login = () => {
         setPasswordInput(event.target.value);
     };
 
-    const submitUserInformation = () => {
-        const response = await fetch
-    };
+    // const submitUserInformation = () => {
+    //     const response = await fetch
+    // };
 
     return (
         <div className={styles.flex}>
