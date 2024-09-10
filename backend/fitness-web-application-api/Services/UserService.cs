@@ -10,10 +10,19 @@ public class UserService {
     public async Task<User> RegisterUserAsync(string email, string password) {
         var newUser = new User {
             Email = email,
-            Password = password
+            PasswordHash = password
         };
 
         return await _userRepository.CreateUserAsync(newUser);
+    }
+
+    public async Task<bool> LoginUserAsync(string email, string password) {
+        var existingUser = new User {
+            Email = email,
+            PasswordHash = password
+        };
+
+        return await _userRepository.ValidateUserAsync(existingUser);
     }
 
 }

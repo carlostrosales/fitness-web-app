@@ -18,15 +18,32 @@ public class AuthorizationController : ControllerBase{
     [HttpPost]
     public async Task<IActionResult> CreateUser([FromBody] User user)
     {
-        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password)) {
+        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash)) {
             return BadRequest("Invalid User Data.");
         }
 
         try {
-            var createdUser = await _userService.RegisterUserAsync(user.Email, user.Password);
+            var createdUser = await _userService.RegisterUserAsync(user.Email, user.PasswordHash);
             return Ok(createdUser); 
 
         } catch (Exception ex) {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> LoginUser([FromBody] User user)
+    {
+        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash))
+        {
+            return BadRequest("Invalid User Data");
+        }
+
+        try {
+            var loginUser = await _userService.LoginUserAsync(user.Email, user.PasswordHash);
+            return Ok(loginUser);
+
+        } catch(Exception ex) {
             return BadRequest(ex.Message);
         }
     }

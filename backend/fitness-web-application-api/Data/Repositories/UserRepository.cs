@@ -15,4 +15,11 @@ public class UserRepository : IUserRepository {
         await _dbContext.SaveChangesAsync();
         return user;
     }
+
+    public async Task<bool> ValidateUserAsync(User user) {
+        bool validatedUserExists = await _dbContext.Users.AnyAsync(u => u.Email.Equals(user.Email)
+        & u.PasswordHash.Equals(user.PasswordHash));
+
+        return validatedUserExists;
+    }
 }
