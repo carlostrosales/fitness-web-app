@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import rectangleImage from './Rectangle.png';
 import rectangleImage1 from './Rectangle1.png';
 
 import styles from './Login.module.css';
+import { PostUserData } from '../../services/authentication/UserServices.tsx';
 
 const Login = () => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
 
 
-    const handleEmailChange = (event) => {
+    const handleEmailChange = (event: any) => {
         setEmailInput(event.target.value);
     };
 
-    const handlePasswordChange = (event) => {
+    const handlePasswordChange = (event: any) => {
         setPasswordInput(event.target.value);
     };
 
-    // const submitUserInformation = () => {
-    //     const response = await fetch
-    // };
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+
+        try {
+            const result = await PostUserData(emailInput, passwordInput);
+            console.log("Success", result);
+        } catch (error: any) {
+            console.log("Error", error.message);
+        }
+    };
 
     return (
         <div className={styles.flex}>
             <img src={rectangleImage} alt="rectangle-image" className={styles.cornerImage}/>
             <img src={rectangleImage1} alt="rectangle-image1" className={styles.cornerImage1}/>
         <h2 className={styles.title}>Login</h2>
-        <label className={styles.forms} name="email">
+        <label className={styles.forms}>
             Email ID <input value={emailInput} onChange={handleEmailChange}className={styles.input}></input>
         </label>
-        <label className={styles.forms} name="password"> 
+        <label className={styles.forms}> 
             Password <input value={passwordInput} onChange={handlePasswordChange} className={styles.input}></input>
         </label>
         <div className={styles.divRow}>
@@ -38,7 +46,7 @@ const Login = () => {
         </div>
         <p className={styles.account}>Don't have an account? <a className={styles.createNew}href="#">Create new</a></p>
         <div className={styles.loginWithContainer}><p className={styles.loginWith}>Or login with</p></div>
-        <button onClick={submitUserInformation}className={styles.googleBtn}>Sign in with Google</button>
+        <button onClick={handleSubmit}className={styles.googleBtn}>Sign in with Google</button>
 
         <p>{emailInput}     {passwordInput}</p>
         </div>

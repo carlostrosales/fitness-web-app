@@ -5,7 +5,7 @@ using fitness_web_application_api.Data;
 namespace fitness_web_application_api.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class AuthorizationController : ControllerBase{
     private readonly ILogger<AuthorizationController> _logger;
     private readonly UserService _userService;
