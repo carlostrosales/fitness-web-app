@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import rectangleImage from './Rectangle.png';
 import rectangleImage1 from './Rectangle1.png';
-
+import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.css';
-import { PostUserData } from '../../services/authentication/UserServices.tsx';
+import { LoginUser, PostUserData } from '../../services/authentication/UserServices.tsx';
 
 const Login = () => {
     const [emailInput, setEmailInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
-
+    const navigate = useNavigate();
 
     const handleEmailChange = (event: any) => {
         setEmailInput(event.target.value);
@@ -24,10 +24,23 @@ const Login = () => {
         try {
             const result = await PostUserData(emailInput, passwordInput);
             console.log("Success", result);
+            navigate('/');
         } catch (error: any) {
             console.log("Error", error.message);
         }
     };
+
+    const handleLogin = async (event: any) => {
+        event.preventDefault();
+
+        try {
+            const result = await LoginUser(emailInput, passwordInput);
+            console.log("Success", result);
+
+        } catch (error: any) {
+            console.log("Error", error.message)
+        }
+    }
 
     return (
         <div className={styles.flex}>
@@ -46,7 +59,8 @@ const Login = () => {
         </div>
         <p className={styles.account}>Don't have an account? <a className={styles.createNew}href="#">Create new</a></p>
         <div className={styles.loginWithContainer}><p className={styles.loginWith}>Or login with</p></div>
-        <button onClick={handleSubmit}className={styles.googleBtn}>Sign in with Google</button>
+        <button onClick={handleSubmit}className={styles.googleBtn}>Sign Up with Google</button>
+        <button onClick={handleLogin}className={styles.googleBtn}>Sign in with Google</button>
 
         <p>{emailInput}     {passwordInput}</p>
         </div>

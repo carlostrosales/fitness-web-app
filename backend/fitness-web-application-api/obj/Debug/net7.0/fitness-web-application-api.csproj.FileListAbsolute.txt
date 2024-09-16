@@ -42,3 +42,4 @@
 /Users/carlosrosales/Personal Projects/fitness-web-app/backend/fitness-web-application-api/bin/Debug/net7.0/Microsoft.Extensions.DependencyModel.dll
 /Users/carlosrosales/Personal Projects/fitness-web-app/backend/fitness-web-application-api/bin/Debug/net7.0/Mono.TextTemplating.dll
 /Users/carlosrosales/Personal Projects/fitness-web-app/backend/fitness-web-application-api/bin/Debug/net7.0/System.CodeDom.dll
+/Users/carlosrosales/Personal Projects/fitness-web-app/backend/fitness-web-application-api/bin/Debug/net7.0/System.Security.Permissions.dll

@@ -1,4 +1,5 @@
 using fitness_web_application_api.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 public class UserService {
     private readonly IUserRepository _userRepository;
@@ -23,6 +24,14 @@ public class UserService {
         };
 
         return await _userRepository.ValidateUserAsync(existingUser);
+    }
+
+    public async Task<User> GetUserProfileByEmailAsync(string email) {
+        if(string.IsNullOrEmpty(email)) {
+            throw new Exception("Not Found"); 
+        }
+
+        return await _userRepository.GetUserByEmailAsync(email);
     }
 
 }

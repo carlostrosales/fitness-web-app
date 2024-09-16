@@ -4,4 +4,6 @@ public interface IUserRepository
 {
     Task<User> CreateUserAsync(User user);
     Task<bool> ValidateUserAsync(User user);
+
+    Task<User> GetUserByEmailAsync(string email);
 }

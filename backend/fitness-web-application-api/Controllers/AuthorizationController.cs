@@ -40,8 +40,23 @@ public class AuthorizationController : ControllerBase{
         }
 
         try {
-            var loginUser = await _userService.LoginUserAsync(user.Email, user.PasswordHash);
-            return Ok(loginUser);
+            var isLoginSuccessful = await _userService.LoginUserAsync(user.Email, user.PasswordHash);
+
+            if (isLoginSuccessful) {
+                return Unauthorized("Invalid credentials.");
+            }
+
+            var loggedInUser = await _userService.GetUserProfileByEmailAsync(user.Email);
+            if (loggedInUser == null) {
+                return Unauthorized("User is not found");
+            }
+
+            // store user details in the session
+            HttpContext.Session.SetString("UserId", loggedInUser.Id.ToString());
+            HttpContext.Session.SetString("Email", loggedInUser.Email);
+            HttpContext.Session.SetString("LastAccessed", DateTime.UtcNow.ToString());
+
+            return Ok(new { Message = "Logged in successfully"});
 
         } catch(Exception ex) {
             return BadRequest(ex.Message);

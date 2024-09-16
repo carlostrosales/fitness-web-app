@@ -21,3 +21,30 @@ export const PostUserData = async (email: any, password: any) => {
         console.log("Error", error);
     }
 };
+
+export const LoginUser = async (email: any, password: any) => {
+    try {
+        await fetch(API_URL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify({
+                email: email,
+                password: password
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Logged in successfully") {
+
+            }
+        })
+        .catch(error => {
+            console.log('Error during login:', error);
+        })
+    } catch (error) {
+        console.log("Error in logging in.");
+    }
+};

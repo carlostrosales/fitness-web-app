@@ -22,4 +22,8 @@ public class UserRepository : IUserRepository {
 
         return validatedUserExists;
     }
+
+    public async Task<User> GetUserByEmailAsync(string email) {
+        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
 }
