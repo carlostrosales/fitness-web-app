@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5062/api/Authorization";
+const API_URL = "http://localhost:5063/api/Authorization";
 
 export const PostUserData = async (email: any, password: any) => {
 
@@ -24,21 +24,24 @@ export const PostUserData = async (email: any, password: any) => {
 
 export const LoginUser = async (email: any, password: any) => {
     try {
-        await fetch(API_URL, {
+        const queryParams = new URLSearchParams({
+            email: email,
+            password: password
+        }).toString();
+
+        await fetch(`${API_URL}?${queryParams}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include',
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
         })
         .then(response => response.json())
         .then(data => {
             if (data.message === "Logged in successfully") {
-
+                return data;
+            } else {
+                throw new Error(data.message);
             }
         })
         .catch(error => {

@@ -24,7 +24,6 @@ const Login = () => {
         try {
             const result = await PostUserData(emailInput, passwordInput);
             console.log("Success", result);
-            navigate('/');
         } catch (error: any) {
             console.log("Error", error.message);
         }
@@ -36,6 +35,7 @@ const Login = () => {
         try {
             const result = await LoginUser(emailInput, passwordInput);
             console.log("Success", result);
+            navigate('/home');
 
         } catch (error: any) {
             console.log("Error", error.message)
@@ -59,8 +59,8 @@ const Login = () => {
         </div>
         <p className={styles.account}>Don't have an account? <a className={styles.createNew}href="#">Create new</a></p>
         <div className={styles.loginWithContainer}><p className={styles.loginWith}>Or login with</p></div>
-        <button onClick={handleSubmit}className={styles.googleBtn}>Sign Up with Google</button>
-        <button onClick={handleLogin}className={styles.googleBtn}>Sign in with Google</button>
+        <button onClick={handleSubmit} className={styles.googleBtn}>Sign Up with Google</button>
+        <button onClick={handleLogin} className={styles.googleBtn}>Sign in with Google</button>
 
         <p>{emailInput}     {passwordInput}</p>
         </div>
