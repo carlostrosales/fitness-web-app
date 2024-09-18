@@ -18,12 +18,14 @@ public class UserRepository : IUserRepository {
 
     public async Task<bool> ValidateUserAsync(User user) {
         bool validatedUserExists = await _dbContext.Users.AnyAsync(u => u.Email.Equals(user.Email)
-        & u.PasswordHash.Equals(user.PasswordHash));
+        & u.Password.Equals(user.Password));
 
         return validatedUserExists;
     }
 
     public async Task<User> GetUserByEmailAsync(string email) {
-        return await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+        User? user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email)
+        ?? throw new InvalidOperationException("User not found.");
+        return user;
     }
 }

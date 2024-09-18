@@ -18,12 +18,12 @@ public class AuthorizationController : ControllerBase{
     [HttpPost]
     public async Task<IActionResult> CreateUser([FromBody] User user)
     {
-        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash)) {
+        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password)) {
             return BadRequest("Invalid User Data.");
         }
 
         try {
-            var createdUser = await _userService.RegisterUserAsync(user.Email, user.PasswordHash);
+            var createdUser = await _userService.RegisterUserAsync(user.Email, user.Password);
             return Ok(createdUser); 
 
         } catch (Exception ex) {
@@ -32,17 +32,17 @@ public class AuthorizationController : ControllerBase{
     }
 
     [HttpGet]
-    public async Task<IActionResult> LoginUser([FromBody] User user)
+    public async Task<IActionResult> LoginUser([FromQuery] User user)
     {
-        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.PasswordHash))
+        if (user == null || string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.Password))
         {
             return BadRequest("Invalid User Data");
         }
 
         try {
-            var isLoginSuccessful = await _userService.LoginUserAsync(user.Email, user.PasswordHash);
+            var isLoginSuccessful = await _userService.LoginUserAsync(user.Email, user.Password);
 
-            if (isLoginSuccessful) {
+            if (!isLoginSuccessful) {
                 return Unauthorized("Invalid credentials.");
             }
 

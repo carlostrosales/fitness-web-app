@@ -18,6 +18,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddCors();
 
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options => {
     options.IdleTimeout = TimeSpan.FromSeconds(10);
     options.Cookie.HttpOnly = true;
@@ -36,9 +37,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors(builder => builder
-    .AllowAnyOrigin()
+    .WithOrigins("http://localhost:5174")
     .AllowAnyMethod()
     .AllowAnyHeader()
+    .AllowCredentials()
 );
 
 app.UseAuthorization();
