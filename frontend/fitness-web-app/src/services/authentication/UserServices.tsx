@@ -29,25 +29,25 @@ export const LoginUser = async (email: any, password: any) => {
             password: password
         }).toString();
 
-        await fetch(`${API_URL}?${queryParams}`, {
+        const response = await fetch(`${API_URL}?${queryParams}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
             credentials: 'include',
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message === "Logged in successfully") {
-                return data;
-            } else {
-                throw new Error(data.message);
-            }
-        })
-        .catch(error => {
-            console.log('Error during login:', error);
-        })
-    } catch (error) {
-        console.log("Error in logging in.");
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            // Throw an error if the response is not ok
+            throw new Error(data.message || 'Login failed');
+        }
+
+        return data;
+
+    } catch (error: any) {
+        console.log("Error during login:", error.message);
+        throw error; // Rethrow the error to handle it in the calling function
     }
 };
