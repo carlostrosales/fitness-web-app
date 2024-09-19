@@ -42,6 +42,10 @@ const Login = () => {
         }
     }
 
+    const handleClick = () => {
+        navigate('/signup');
+    }
+
     return (
         <div className={styles.flex}>
             <img src={rectangleImage} alt="rectangle-image" className={styles.cornerImage}/>
@@ -54,15 +58,12 @@ const Login = () => {
             Password <input value={passwordInput} onChange={handlePasswordChange} className={styles.input}></input>
         </label>
         <div className={styles.divRow}>
-        <button className={styles.loginBtn}>Login</button>
+        <button onClick={handleLogin} className={styles.loginBtn}>Login</button>
         <p className={styles.password}>Forgot password?</p>
         </div>
-        <p className={styles.account}>Don't have an account? <a className={styles.createNew}href="#">Create new</a></p>
+        <p className={styles.account} onClick={handleClick}>Don't have an account? <a className={styles.createNew}href="#">Create new</a></p>
         <div className={styles.loginWithContainer}><p className={styles.loginWith}>Or login with</p></div>
-        <button onClick={handleSubmit} className={styles.googleBtn}>Sign Up with Google</button>
-        <button onClick={handleLogin} className={styles.googleBtn}>Sign in with Google</button>
-
-        <p>{emailInput}     {passwordInput}</p>
+        <button onClick={handleSubmit} className={styles.googleBtn}>Sign In with Google</button>
         </div>
     )
 }
