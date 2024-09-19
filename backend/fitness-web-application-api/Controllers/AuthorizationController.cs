@@ -52,7 +52,7 @@ public class AuthorizationController : ControllerBase{
             }
 
             // store user details in the session
-            HttpContext.Session.SetString("UserId", loggedInUser.Id.ToString());
+            HttpContext.Session.SetString("UserId", loggedInUser.UserId.ToString());
             HttpContext.Session.SetString("Email", loggedInUser.Email);
             HttpContext.Session.SetString("LastAccessed", DateTime.UtcNow.ToString());
 

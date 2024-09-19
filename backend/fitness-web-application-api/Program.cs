@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseCors(builder => builder
-    .WithOrigins("http://localhost:5173")
+    .WithOrigins("http://localhost:5174")
     .AllowAnyMethod()
     .AllowAnyHeader()
     .AllowCredentials()

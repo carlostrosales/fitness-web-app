@@ -4,8 +4,10 @@ namespace fitness_web_application_api.Models;
 
 public class User {
     [Key]
-    public int Id { get; set;}
+    public int UserId { get; set;}
     public required String Email { get; set;}
-
     public required String Password { get; set;}
+
+    // Navigation Property
+    public virtual ICollection<Workout>? Workouts { get; set; }
 }
