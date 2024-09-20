@@ -1,0 +1,52 @@
+.flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.cornerImage {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px; /* Adjust the width to fit your design */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+.cornerImage1 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 300px; /* Adjust the width to fit your design */
+    height: auto; /* Maintain aspect ratio */
+    max-width: 100%; /* Ensure it doesn't overflow */
+}
+
+.title {
+    margin-top: 3rem;
+}
+
+.box {
+    border: 2px solid rgba(197, 197, 197, 0.4);
+    width: 24rem;
+    height: 2.2rem;
+    border-radius: 6px;
+    margin-top: 2.5rem;
+    color: #c5c5c5;
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+
+.exerciseBtn {
+    margin-top: 4rem;
+    margin-right: 16rem;
+    font-weight: 600;
+    border: 2px solid rgba(197, 197, 197, 0.4);
+    background-color: #027CE6;
+    color: white;
+    border-radius: 15px;
+    width: 8rem;
+    height: 2.5rem;
+    font-size: 15px;
+}
