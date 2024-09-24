@@ -2,24 +2,72 @@ import rectangleImage from '../components/authentication/Rectangle.png';
 import rectangleImage4 from '../components/authentication/Rectangle4.png';
 import styles from './Workouts.module.css';
 import { useState } from 'react';
+import FormDialog from './FormDialog.tsx';
 
 export const Workouts = () => {
-    const [ quads, setQuads ] = useState('Quad Exercise');
-    const [ hams, setHams ] = useState('Hamstring Exercise');
-    const [ shoulders, setShoulders ] = useState('Shoulder Exercise');
-    const [ chest, setChest ] = useState('Chest Exercise');
-    const [ back, setBack ] = useState('Back Exercise');
+
+    // Define a type for the shape of each muscle group
+    type MuscleGroup = {
+        exercise: string;
+        sets: number;
+        reps: number;
+    };
+
+    // Define the state type
+    type Exercises = {
+        quads: MuscleGroup;
+        hams: MuscleGroup;
+        shoulders: MuscleGroup;
+        chest: MuscleGroup;
+        back: MuscleGroup;
+    };
+
+    // Define the valid keys for muscle groups
+    type MuscleGroupKey = keyof Exercises;
+
+
+    const [exercises, setExercises] = useState<Exercises>({
+        quads: { exercise: 'Quad Exercise', sets: 0, reps: 0},
+        hams: { exercise: 'Hamstring Exercise', sets: 0, reps: 0 },
+        shoulders: { exercise: 'Shoulders Exercise', sets: 0, reps: 0 },
+        chest: { exercise: 'Chest Exercise', sets: 0, reps: 0 },
+        back: { exercise: 'Back Exercise', sets: 0, reps: 0 },
+    })
+
+    const [dialogOpen, setDialogOpen] = useState(false);
+
+    const handleDialogOpen = () => {
+        setDialogOpen(true);
+    }
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+    }
+
+    const handleFormSubmit = (muscleGroup: MuscleGroupKey, exercise: string, sets: number, reps: number) => {
+        setExercises(prev => ({
+            ...prev,
+            [muscleGroup]: {
+                ...prev[muscleGroup],
+                exercise,
+                sets,
+                reps
+            }
+        }))
+    }
+
     return (
         <div className={styles.flex}>
-            <img src={rectangleImage} className={styles.cornerImage}/>
-            <img src={rectangleImage4} className={styles.cornerImage1}/>
+            <img src={rectangleImage} className={styles.cornerImage} />
+            <img src={rectangleImage4} className={styles.cornerImage1} />
             <h2 className={styles.title}>Workout</h2>
-            <div className={styles.box}>{quads}</div>
-            <div className={styles.box}>{hams}</div>
-            <div className={styles.box}>{shoulders}</div>
-            <div className={styles.box}>{chest}</div>
-            <div className={styles.box}>{back}</div>
-            <button className={styles.exerciseBtn}>Add Exercise</button>
+            <div className={styles.box}>{exercises.quads.exercise}{exercises.quads.sets}x{exercises.quads.reps}</div>
+            <div className={styles.box}>{exercises.hams.exercise}{exercises.hams.sets}x{exercises.hams.reps}</div>
+            <div className={styles.box}>{exercises.shoulders.exercise}{exercises.shoulders.sets}x{exercises.shoulders.reps}</div>
+            <div className={styles.box}>{exercises.chest.exercise}{exercises.chest.sets}x{exercises.chest.reps}</div>
+            <div className={styles.box}>{exercises.back.exercise}{exercises.back.sets}x{exercises.back.reps}</div>
+            <button className={styles.exerciseBtn} onClick={handleDialogOpen}>Add Exercise</button>
+            <FormDialog open={dialogOpen} onClose={handleDialogClose} onSubmit={handleFormSubmit} />
         </div>
     )
 }
