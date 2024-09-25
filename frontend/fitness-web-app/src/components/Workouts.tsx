@@ -11,6 +11,7 @@ export const Workouts = () => {
         exercise: string;
         sets: number;
         reps: number;
+        weight: number;
     };
 
     // Define the state type
@@ -27,11 +28,11 @@ export const Workouts = () => {
 
 
     const [exercises, setExercises] = useState<Exercises>({
-        quads: { exercise: 'Quad Exercise', sets: 0, reps: 0},
-        hams: { exercise: 'Hamstring Exercise', sets: 0, reps: 0 },
-        shoulders: { exercise: 'Shoulders Exercise', sets: 0, reps: 0 },
-        chest: { exercise: 'Chest Exercise', sets: 0, reps: 0 },
-        back: { exercise: 'Back Exercise', sets: 0, reps: 0 },
+        quads: { exercise: 'Quad Exercise', sets: 0, reps: 0, weight: 0},
+        hams: { exercise: 'Hamstring Exercise', sets: 0, reps: 0, weight: 0 },
+        shoulders: { exercise: 'Shoulders Exercise', sets: 0, reps: 0, weight: 0 },
+        chest: { exercise: 'Chest Exercise', sets: 0, reps: 0, weight: 0 },
+        back: { exercise: 'Back Exercise', sets: 0, reps: 0, weight: 0},
     })
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -44,14 +45,15 @@ export const Workouts = () => {
         setDialogOpen(false);
     }
 
-    const handleFormSubmit = (muscleGroup: MuscleGroupKey, exercise: string, sets: number, reps: number) => {
+    const handleFormSubmit = (muscleGroup: MuscleGroupKey, exercise: string, sets: number, reps: number, weight: number) => {
         setExercises(prev => ({
             ...prev,
             [muscleGroup]: {
                 ...prev[muscleGroup],
                 exercise,
                 sets,
-                reps
+                reps,
+                weight,
             }
         }))
     }
@@ -61,11 +63,11 @@ export const Workouts = () => {
             <img src={rectangleImage} className={styles.cornerImage} />
             <img src={rectangleImage4} className={styles.cornerImage1} />
             <h2 className={styles.title}>Workout</h2>
-            <div className={styles.box}>{exercises.quads.exercise}{exercises.quads.sets}x{exercises.quads.reps}</div>
-            <div className={styles.box}>{exercises.hams.exercise}{exercises.hams.sets}x{exercises.hams.reps}</div>
-            <div className={styles.box}>{exercises.shoulders.exercise}{exercises.shoulders.sets}x{exercises.shoulders.reps}</div>
-            <div className={styles.box}>{exercises.chest.exercise}{exercises.chest.sets}x{exercises.chest.reps}</div>
-            <div className={styles.box}>{exercises.back.exercise}{exercises.back.sets}x{exercises.back.reps}</div>
+            <div className={styles.box}>{exercises.quads.exercise}{exercises.quads.sets}x{exercises.quads.reps}{exercises.quads.weight}</div>
+            <div className={styles.box}>{exercises.hams.exercise}{exercises.hams.sets}x{exercises.hams.reps}{exercises.hams.weight}</div>
+            <div className={styles.box}>{exercises.shoulders.exercise}{exercises.shoulders.sets}x{exercises.shoulders.reps}{exercises.shoulders.weight}</div>
+            <div className={styles.box}>{exercises.chest.exercise}{exercises.chest.sets}x{exercises.chest.reps}{exercises.chest.weight}</div>
+            <div className={styles.box}>{exercises.back.exercise}{exercises.back.sets}x{exercises.back.reps}{exercises.back.weight}</div>
             <button className={styles.exerciseBtn} onClick={handleDialogOpen}>Add Exercise</button>
             <FormDialog open={dialogOpen} onClose={handleDialogClose} onSubmit={handleFormSubmit} />
         </div>

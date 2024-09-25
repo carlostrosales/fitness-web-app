@@ -8,6 +8,7 @@ type MuscleGroup = {
     exercise: string;
     sets: number;
     reps: number;
+    weight: number;
 };
 
 type Exercises = {
@@ -21,7 +22,7 @@ type Exercises = {
 interface FormDialogProps {
     open: boolean;
     onClose: () => void;
-    onSubmit: (muscleGroup: keyof Exercises, exercise: string, sets: number, reps: number) => void;
+    onSubmit: (muscleGroup: keyof Exercises, exercise: string, sets: number, reps: number, weight: number) => void;
 }
 
 const FormDialog = (props: FormDialogProps) => {
@@ -30,9 +31,10 @@ const FormDialog = (props: FormDialogProps) => {
     const [muscleGroup, setMuscleGroup] = useState<keyof Exercises>('quads');
     const [ sets, setSets ] = useState(0);
     const [ reps, setReps ] = useState(0);
+    const [ weight, setWeight ] = useState(0);
 
     const handleSubmit = () => {
-        onSubmit(muscleGroup, exercise, sets, reps);
+        onSubmit(muscleGroup, exercise, sets, reps, weight);
         onClose();
     }
 
@@ -56,6 +58,7 @@ const FormDialog = (props: FormDialogProps) => {
                 </FormControl>
                 <TextField label="Sets" value={sets} onChange={(e) => setSets(Number(e.target.value))} />
                 <TextField label="Reps" value={reps} onChange={(e) => setReps(Number(e.target.value))} />
+                <TextField label="Weight" value={weight} onChange={(e) => setWeight(Number(e.target.value))} />
                 <Button onClick={handleSubmit}>Submit</Button>
             </Dialog>
         </React.Fragment>
